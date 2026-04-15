@@ -1,0 +1,10 @@
+fastapi==0.115.0
+uvicorn==0.30.0
+python-multipart==0.0.9
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.5.1
+fairlearn==0.10.0
+shap==0.45.1
+google-genai==1.0.0
+python-dotenv==1.0.1
