@@ -12,6 +12,7 @@ import ComplianceScanner from './components/ComplianceScanner'
 import BiasFingerprint from './components/BiasFingerprint'
 import MonitorDashboard from './components/MonitorDashboard'
 import GeminiReport from './components/GeminiReport'
+import LandingPage from './components/LandingPage'
 
 // Grouped nav — judges see clear product thinking
 const NAV_GROUPS = [
@@ -126,6 +127,7 @@ function AnalysisLoader() {
 }
 
 export default function App() {
+  const [showApp, setShowApp] = useState(false)
   const [activeTab, setActiveTab] = useState('upload')
   const [datasetId, setDatasetId] = useState(null)
   const [datasetInfo, setDatasetInfo] = useState(null)
@@ -238,6 +240,10 @@ export default function App() {
       default:
         return null
     }
+  }
+
+  if (!showApp) {
+    return <LandingPage onLaunchApp={() => setShowApp(true)} />
   }
 
   return (
