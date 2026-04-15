@@ -79,3 +79,25 @@ export async function monitorPredictions(predictions, groups, sensitiveColumn = 
 export async function getMonitorHistory() {
   return request('/monitor/history');
 }
+
+// ─── PHD-LEVEL FEATURES ─────────────────────
+
+export async function getCausalAnalysis(datasetId) {
+  return request(`/causal/${datasetId}`, { method: 'POST' });
+}
+
+export async function getLegalRisk(datasetId) {
+  return request(`/legal-risk/${datasetId}`, { method: 'POST' });
+}
+
+export async function getCertificate(datasetId) {
+  return request(`/certificate/${datasetId}`, { method: 'POST' });
+}
+
+export async function getSyntheticData(datasetId) {
+  return request(`/synthetic/${datasetId}`, { method: 'POST' });
+}
+
+export async function getProvenance(datasetId) {
+  return request(`/provenance/${datasetId}`, { method: 'POST' });
+}

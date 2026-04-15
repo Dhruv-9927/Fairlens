@@ -13,6 +13,11 @@ import BiasFingerprint from './components/BiasFingerprint'
 import MonitorDashboard from './components/MonitorDashboard'
 import GeminiReport from './components/GeminiReport'
 import LandingPage from './components/LandingPage'
+import CausalEngine from './components/CausalEngine'
+import LegalRisk from './components/LegalRisk'
+import FairnessCertificate from './components/FairnessCertificate'
+import SyntheticGenerator from './components/SyntheticGenerator'
+import BiasProvenance from './components/BiasProvenance'
 
 // Grouped nav — judges see clear product thinking
 const NAV_GROUPS = [
@@ -20,7 +25,8 @@ const NAV_GROUPS = [
     label: 'Detect',
     tabs: [
       { id: 'upload', label: 'Analyze' },
-      { id: 'counterfactual', label: 'Stories' },
+      { id: 'causal', label: 'Root Cause' },
+      { id: 'provenance', label: 'Provenance' },
     ],
   },
   {
@@ -28,21 +34,25 @@ const NAV_GROUPS = [
     tabs: [
       { id: 'whatif', label: 'What-If' },
       { id: 'mitigation', label: 'Mitigate' },
+      { id: 'synthetic', label: 'Synthetic' },
     ],
   },
   {
     label: 'Govern',
     tabs: [
       { id: 'compliance', label: 'Compliance' },
+      { id: 'legalrisk', label: 'Legal $' },
+      { id: 'certificate', label: 'Certificate' },
       { id: 'report', label: 'Report' },
-      { id: 'monitor', label: 'Monitor' },
     ],
   },
   {
     label: 'Test',
     tabs: [
       { id: 'adversarial', label: 'Red Team' },
+      { id: 'counterfactual', label: 'Stories' },
       { id: 'chat', label: 'Ask AI' },
+      { id: 'monitor', label: 'Monitor' },
     ],
   },
 ]
@@ -237,6 +247,16 @@ export default function App() {
         return <GeminiReport datasetId={datasetId} />
       case 'monitor':
         return <MonitorDashboard />
+      case 'causal':
+        return <CausalEngine datasetId={datasetId} />
+      case 'legalrisk':
+        return <LegalRisk datasetId={datasetId} />
+      case 'certificate':
+        return <FairnessCertificate datasetId={datasetId} />
+      case 'synthetic':
+        return <SyntheticGenerator datasetId={datasetId} />
+      case 'provenance':
+        return <BiasProvenance datasetId={datasetId} />
       default:
         return null
     }
