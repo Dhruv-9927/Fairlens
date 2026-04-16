@@ -10,8 +10,11 @@ import numpy as np
 import pandas as pd
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Optional
+import os
 
 from bias_engine import full_analysis, detect_sensitive_columns, detect_target_column, compute_fairness_metrics
 from mitigation import mitigate
@@ -929,6 +932,19 @@ def bias_provenance(dataset_id: str):
     }
 
 
+if os.path.isdir("static"):
+    app.mount("/assets", StaticFiles(directory="static/assets"), name="assets")
+
+    @app.get("/{full_path:path}")
+    async def serve_frontend(full_path: str):
+        # Allow hitting the root
+        target_path = os.path.join("static", full_path)
+        if os.path.isfile(target_path):
+            return FileResponse(target_path)
+        # Fallback to index.html for React router
+        return FileResponse("static/index.html")
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port, reload=True)
