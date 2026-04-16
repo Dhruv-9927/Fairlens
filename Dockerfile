@@ -17,6 +17,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the backend application code
 COPY backend/ .
 
+# Copy the datasets directory
+COPY datasets/ /app/datasets
+
 # Copy the pre-built React frontend into a static directory inside the backend app
 COPY --from=frontend-builder /app/frontend/dist /app/static
 

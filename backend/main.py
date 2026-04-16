@@ -421,7 +421,10 @@ def get_monitor_history():
 def list_samples():
     """List available sample datasets."""
     import os
-    samples_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "datasets")
+    dev_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "datasets")
+    prod_path = os.path.join(os.path.dirname(__file__), "datasets")
+    samples_dir = dev_path if os.path.exists(dev_path) else prod_path
+
     samples = []
     if os.path.exists(samples_dir):
         for f in os.listdir(samples_dir):
@@ -440,7 +443,10 @@ def list_samples():
 def load_sample(filename: str):
     """Load a sample dataset."""
     import os
-    samples_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "datasets")
+    dev_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "datasets")
+    prod_path = os.path.join(os.path.dirname(__file__), "datasets")
+    samples_dir = dev_path if os.path.exists(dev_path) else prod_path
+    
     filepath = os.path.join(samples_dir, filename)
 
     if not os.path.exists(filepath):
